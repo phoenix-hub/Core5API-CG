@@ -21,21 +21,22 @@ namespace ApiApp.Controllers
         }
         [HttpGet]
         [Route("api/[Controller]")]
+        [ProducesResponseType(typeof(List<CustomerDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> GetCustomers()
         {
             var listCustomer = await _customerServices.GetCustomer();
-            if (listCustomer != null)
-            {
-                return Ok(listCustomer);
-            }
-            else
+            if (listCustomer == null)
             {
                 return NotFound($"Customers not found.");
             }
+            return Ok(listCustomer);
         }
 
         [HttpGet]
         [Route("api/[Controller]/ByCategory/{Category}")]
+        [ProducesResponseType(typeof(List<CustomerDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> GetCustomersByCategory(string Category)
         {
             if (string.IsNullOrEmpty(Category))
@@ -57,6 +58,8 @@ namespace ApiApp.Controllers
 
         [HttpGet]
         [Route("api/[Controller]/CustomerCategories")]
+        [ProducesResponseType(typeof(List<CustomerDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> CustomerCategories()
         { 
             var listCustomer = await _customerServices.GetCustomerCategories();
