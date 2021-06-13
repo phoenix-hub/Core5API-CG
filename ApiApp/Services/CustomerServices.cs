@@ -17,7 +17,7 @@ namespace ApiApp.Services
         {
             _db = db;
         }
-        public async Task<IEnumerable<Customer>> GetCustomer()
+        public async Task<IEnumerable<CustomerDto>> GetCustomer()
         {
             var customers = await _db.Customers.ToListAsync(); 
 
@@ -31,7 +31,7 @@ namespace ApiApp.Services
             return customers;
         }
 
-        public async Task<IEnumerable<Customer>> GetCustomersByCategory(string Category)
+        public async Task<IEnumerable<CustomerDto>> GetCustomersByCategory(string Category)
         {
             var customers = await _db.Customers.Where(x => x.CustomerCategoryName== Category).ToListAsync();
 

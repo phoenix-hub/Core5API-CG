@@ -17,11 +17,11 @@ namespace ApiApp.Models
             Configuration = configuration;
         }
 
-        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<CustomerDto> Customers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Customer>(entity =>
+            modelBuilder.Entity<CustomerDto>(entity =>
             {
                 entity.HasNoKey();
 

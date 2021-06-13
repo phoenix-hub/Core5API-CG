@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ApiApp.Models
 {
-    public partial class Customer
+    public partial class CustomerDto
     {
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }

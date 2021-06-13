@@ -8,8 +8,8 @@ namespace ApiApp.Services
 {
     public interface ICustomerServices
     {
-        Task<IEnumerable<Customer>> GetCustomer();
-        Task<IEnumerable<Customer>> GetCustomersByCategory(string Category);
+        Task<IEnumerable<CustomerDto>> GetCustomer();
+        Task<IEnumerable<CustomerDto>> GetCustomersByCategory(string Category);
         Task<IEnumerable<string>> GetCustomerCategories();
     }
 }
