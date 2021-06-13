@@ -12,6 +12,7 @@ namespace ApiApp.Services
     { 
 
         private readonly WideWorldImportersContext _db;
+
         public CustomerServices(WideWorldImportersContext db)
         {
             _db = db;
@@ -23,14 +24,18 @@ namespace ApiApp.Services
             return customers;
         }
 
-        public Task<IEnumerable<string>> GetCustomerCategories()
+        public async Task<IEnumerable<string>> GetCustomerCategories()
         {
-            throw new NotImplementedException();
+            var customers = await _db.Customers.Select(x=> x.CustomerCategoryName).Distinct().ToListAsync();
+
+            return customers;
         }
 
-        public Task<IEnumerable<Customer>> GetCustomersByCategory(string Category)
+        public async Task<IEnumerable<Customer>> GetCustomersByCategory(string Category)
         {
-            throw new NotImplementedException();
+            var customers = await _db.Customers.Where(x => x.CustomerCategoryName== Category).ToListAsync();
+
+            return customers;
         }
     }
 }

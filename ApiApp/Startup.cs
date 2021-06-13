@@ -25,6 +25,7 @@ namespace ApiApp
         {
 
             services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiApp", Version = "v1" });
@@ -32,14 +33,17 @@ namespace ApiApp
 
             services.AddDbContext<WideWorldImportersContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            //services.AddEntityFrameworkSqlServer();
-            //services.AddDbContextPool<WideWorldImportersContext>((serviceProvider, optionsBuilder) =>
-            //{
-            //    optionsBuilder.UseSqlServer();
-            //    optionsBuilder.UseInternalServiceProvider(serviceProvider);
-            //});
-            
             services.AddScoped<ICustomerServices, CustomerServices>();
+
+            services.AddCors(options => {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins("https://localhost:4200", "http://localhost:4200")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +57,8 @@ namespace ApiApp
             }
 
             app.UseRouting();
+            
+            app.UseCors();
 
             app.UseAuthorization();
 
