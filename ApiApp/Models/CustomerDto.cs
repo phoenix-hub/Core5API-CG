@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-#nullable disable
-
+﻿
 namespace ApiApp.Models
 {
     public partial class CustomerDto

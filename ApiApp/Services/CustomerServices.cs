@@ -1,7 +1,5 @@
 ﻿using ApiApp.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +7,7 @@ using System.Threading.Tasks;
 namespace ApiApp.Services
 {
     public class CustomerServices : ICustomerServices
-    { 
+    {
 
         private readonly WideWorldImportersContext _db;
 
@@ -17,23 +15,23 @@ namespace ApiApp.Services
         {
             _db = db;
         }
-        public async Task<IEnumerable<CustomerDto>> GetCustomer()
+        public async Task<IEnumerable<CustomerDto>> GetCustomers()
         {
-            var customers = await _db.Customers.ToListAsync(); 
+            var customers = await _db.Customers.ToListAsync();
 
             return customers;
         }
 
         public async Task<IEnumerable<string>> GetCustomerCategories()
         {
-            var customers = await _db.Customers.Select(x=> x.CustomerCategoryName).Distinct().ToListAsync();
+            var customers = await _db.Customers.Select(x => x.CustomerCategoryName).Distinct().ToListAsync();
 
             return customers;
         }
 
         public async Task<IEnumerable<CustomerDto>> GetCustomersByCategory(string Category)
         {
-            var customers = await _db.Customers.Where(x => x.CustomerCategoryName== Category).ToListAsync();
+            var customers = await _db.Customers.Where(x => x.CustomerCategoryName == Category).ToListAsync();
 
             return customers;
         }

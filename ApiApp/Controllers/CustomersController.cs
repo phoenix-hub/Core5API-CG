@@ -3,9 +3,7 @@ using ApiApp.Models;
 using ApiApp.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ApiApp.Controllers
@@ -25,7 +23,7 @@ namespace ApiApp.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> GetCustomers()
         {
-            var listCustomer = await _customerServices.GetCustomer();
+            var listCustomer = await _customerServices.GetCustomers();
             if (listCustomer == null)
             {
                 return NotFound($"Customers not found.");
@@ -58,10 +56,10 @@ namespace ApiApp.Controllers
 
         [HttpGet]
         [Route("api/[Controller]/CustomerCategories")]
-        [ProducesResponseType(typeof(List<CustomerDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> CustomerCategories()
-        { 
+        {
             var listCustomer = await _customerServices.GetCustomerCategories();
             if (listCustomer != null)
             {
